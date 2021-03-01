@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block nav_links %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="/create/advert/">Create</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="advertTitle" id="title" placeholder="Selling Samsung S10" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" name="advertDescription" id="description" placeholder="Smartphone in excellent condition, I sell it as unnecessary" required></textarea>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="advertCondition" id="new" value="new">
+                <label class="form-check-label" for="new">New</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="advertCondition" id="used" value="used">
+                <label class="form-check-label" for="used">Used</label>
+            </div>
+            <div class="mb-3 mt-2">
+                <label for="photo" class="form-label">Photo</label>
+                <input class="form-control" name="advertPhoto" type="file" id="photo" required>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Your name</label>
+                <input type="text" class="form-control" name="advertSellerName" id="name" placeholder="John Snow" required>
+            </div>
+            <div class="mb-3">
+                <label for="contact" class="form-label">Contact</label>
+                <input type="tel" class="form-control" name="advertSellerContact" id="contact" placeholder="+79164789848" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

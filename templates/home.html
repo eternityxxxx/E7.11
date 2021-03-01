@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block nav_links %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/create/advert/">Create</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    {% if ads|length > 0 %}
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                {% for ad in ads %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <img src="{{ url_for('send_photo', filename=ad.photo) }}" class="card-img-top" alt="Advert photo">
+                            <div class="card-body">
+                                <p class="card-text"><small class="text-muted">Uploaded: {{ ad.date }}</small></p>
+                                <h5 class="card-title">{{ ad.title }}</h5>
+                                <p class="card-text">{{ ad.description }}</p>
+                                <p class="card-text">Condition: {{ ad.condition }}</p>
+                                <div class="tags">
+                                    Tags:
+                                    {% if ad.tags|length > 0 %}
+                                        {% for tag in ad.tags %}
+                                            <span style="padding: 4px; background-color: green; color: white; border-radius: 8px;">{{ tag }}</span>
+                                        {% endfor %}
+                                    {% else %}
+                                        there are no tags yet
+                                    {% endif %}
+                                </div>
+                                <a class="btn btn-sm btn-primary mt-3" href="/create/tag/{{ ad._id }}">Add tag</a>
+                                <hr>
+                                <p class="card-text">Author: {{ ad.name }}</p>
+                                <p class="card-text">Contact: {{ ad.contact }}</p>
+                                <details>
+                                    <summary>Show comments</summary>
+                                    <a class="btn btn-sm btn-primary mt-2" href="/create/comment/{{ ad._id }}">New comment</a>
+                                    {% if ad.comments|length > 0 %}
+                                        {% for comment in ad.comments %}
+                                            <h5 class="mt-2">{{ comment.author }}</h5>
+                                            <p>{{ comment.comment }}</p>
+                                            <hr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>No comments yet</p>
+                                    {% endif %}
+                                </details>
+                                <p class="card-text mt-2">Comments: {{ ad.comments|length }} | Tags: {{ ad.tags|length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="d-flex justify-content-center align-items-center flex-column mt-5">
+            <h1>There are no adverts yet</h1>
+            <p>Be the first and create your advert right now</p>
+            <a class="btn btn-primary" href="/create/advert/">Create advert</a>
+        </div>
+    {% endif %}
+{% endblock %}
