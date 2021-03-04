@@ -20,4 +20,5 @@ ___
 ![Скриншот приложения](./screenshots/10.png)
 ___
 #### Развертывание:
+```git clone https://github.com/eternityxxxx/E7.11.git```  
 ```docker-compose --build up```
